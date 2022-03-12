@@ -1,26 +1,72 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Переключение Tabs</h1>
+  <hr>
+  <app-async></app-async>
+
+  <app-button
+      :color="oneColor"
+      @btnclick="activeBtn = 'onenews' "
+  >
+    One
+  </app-button>
+
+  <app-button
+      :color="activeBtn === 'twonews' ? 'active': '' "
+      @btnclick="activeBtn = 'twonews' "
+
+  >
+    Two
+  </app-button>
+  <keep-alive>
+    <component :is="componentName"></component>
+  </keep-alive>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppNewsOne from "@/components/AppNewsOne";
+import AppNewsTwo from "@/components/AppNewsTwo";
+import AppButton from "@/components/AppButton";
+import AppAsync from "@/components/AppAsync";
 
 export default {
   name: 'App',
+  data() {
+    return {
+      activeBtn: 'onenews'
+    }
+  },
+
+  computed: {
+    componentName() {
+      if (this.activeBtn === 'onenews') {
+        return 'app-news-one'
+      } else {
+        return 'app-news-two'
+      }
+    },
+
+    oneColor() {
+      return this.activeBtn === 'onenews' ? 'active': ''
+    }
+  },
   components: {
-    HelloWorld
+    AppAsync,
+    AppNewsOne,
+    AppNewsTwo,
+    AppButton,
   }
+
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+
+button {
+  margin-bottom: 30px;
+  margin-left: 20px;
 }
+
 </style>

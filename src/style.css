@@ -1,0 +1,16 @@
+* {
+    text-align: center;
+}
+
+.btn {
+    background: #89cccc;
+    border: none;
+    padding: 5px 30px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.active {
+    background: #5add5a;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
